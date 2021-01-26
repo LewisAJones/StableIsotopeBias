@@ -1,0 +1,25 @@
+{
+    "id": "F4F57C08",
+    "path": "~/GitHub/StableIsotopeBias/R/subscripts/data_clean.R",
+    "project_path": "R/subscripts/data_clean.R",
+    "type": "r_source",
+    "hash": "3328766326",
+    "contents": "",
+    "dirty": false,
+    "created": 1611150631287.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "cursorPosition": "15,44",
+        "scrollLine": "8",
+        "tempName": "Untitled1"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1611592426,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1611592426208,
+    "read_only": false,
+    "read_only_alternatives": []
+}

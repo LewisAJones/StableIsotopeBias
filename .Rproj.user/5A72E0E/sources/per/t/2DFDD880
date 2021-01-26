@@ -1,0 +1,24 @@
+{
+    "id": "2DFDD880",
+    "path": "~/GitHub/LBG_sim/R/functions/LBG_type.R",
+    "project_path": null,
+    "type": "r_source",
+    "hash": "3147438761",
+    "contents": "",
+    "dirty": false,
+    "created": 1611506271061.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "cursorPosition": "10,36",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1610024890,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1610024890,
+    "read_only": false,
+    "read_only_alternatives": []
+}

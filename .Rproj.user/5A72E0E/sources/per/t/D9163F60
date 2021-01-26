@@ -1,0 +1,25 @@
+{
+    "id": "D9163F60",
+    "path": "~/GitHub/StableIsotopeBias/R/subscripts/climate_model_data.R",
+    "project_path": "R/subscripts/climate_model_data.R",
+    "type": "r_source",
+    "hash": "3390493661",
+    "contents": "",
+    "dirty": false,
+    "created": 1611594241090.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "tempName": "Untitled1",
+        "cursorPosition": "22,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1611595335,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1611595335657,
+    "read_only": false,
+    "read_only_alternatives": []
+}
