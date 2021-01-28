@@ -70,7 +70,7 @@ rotations <- data.frame(t(pbsapply(1:nrow(uniq), function(i) {
               dir = "./data/", #directory of plate model
               path.gplates="C:/Program Files (x86)/GPlates/GPlates 2.2.0/gplates-2.2.0.exe",
               cleanup = TRUE,
-              verbose = TRUE) # directory of gplates
+              verbose = FALSE) # directory of gplates
   
   files <- list.files("./data/", full.names = TRUE)
   files <- files[files != c("./data/StabIsoDB.csv")]
