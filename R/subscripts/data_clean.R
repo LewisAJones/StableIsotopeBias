@@ -58,23 +58,24 @@ data$temperature <- sapply(1:nrow(data), function(x)
 data$rounded_age <- round(data$age)
 
 #palaeorotate coordinates
-#pm <- fetch("paleomap", "model", datadir="./data/") #download plate model
+pm <- fetch("paleomap", "model", datadir="./data/") #download plate model
 
 uniq <- unique(data[,c("long", "lat", "rounded_age")])
 
 rotations <- data.frame(t(pbsapply(1:nrow(uniq), function(i) {
-  coords <- palaeorotate(lng = uniq$long[i], lat = uniq$lat[i], age = uniq$rounded_age[i])
-  #coords <-   reconstruct(x = (uniq[i, c("long", "lat")]), #coordinate sof data
-  #            age= uniq$rounded_age[i], #age of data 
-  #            model=pm, #plate model
-  #            dir = "./data/", #directory of plate model
-  #            path.gplates="C:/Program Files (x86)/GPlates/GPlates 2.2.0/gplates-2.2.0.exe",
-  #            cleanup = FALSE) # directory of gplates
+  #coords <- palaeorotate(lng = uniq$long[i], lat = uniq$lat[i], age = uniq$rounded_age[i])
+  coords <-   reconstruct(x = (uniq[i, c("long", "lat")]), #coordinate sof data
+              age = uniq$rounded_age[i], #age of data 
+              model=pm, #plate model
+              dir = "./data/", #directory of plate model
+              path.gplates="C:/Program Files (x86)/GPlates/GPlates 2.2.0/gplates-2.2.0.exe",
+              cleanup = TRUE,
+              verbose = TRUE) # directory of gplates
   
-  #files <- list.files("./data/", full.names = TRUE)
-  #files <- files[files != c("./data/StabIsoDB.csv")]
+  files <- list.files("./data/", full.names = TRUE)
+  files <- files[files != c("./data/StabIsoDB.csv")]
   #files <- files[files != c("./data/layers")]
-  #do.call(file.remove, list(files))
+  do.call(file.remove, list(files))
   coords <- round(coords, digits = 2)
   coords
   
