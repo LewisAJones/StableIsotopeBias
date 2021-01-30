@@ -26,7 +26,7 @@ df <- cbind.data.frame(mean, sd, lats)
 df <- na.omit(df)
 
 p <- ggplot(df) +
-  geom_errorbar(aes(x=lats, ymin=mean-sd, ymax=mean+sd), width=0.4, colour="orange", alpha=0.9, size=1.3) +
+  geom_errorbar(aes(x=lats, ymin=mean-sd, ymax=mean+sd), width=0.4, colour="#2ca25f", alpha=0.9, size=1.3) +
   geom_line(aes(x=lats, y=mean), colour="black", size = 1.25, alpha=0.7) +
   labs(x = expression(bold(paste("Latitude (",degree,")"))), y = expression(bold(paste("Sea surface temperature (",degree, C,")")))) +
   theme(panel.background = element_blank(),
@@ -51,6 +51,7 @@ p <- ggplot(df) +
         plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
         aspect.ratio = 0.4)
   
+p
 
 ggsave(file = "./results/SST/sst_gradient.png", plot = p, width = 150, height = 75, units = "mm", dpi = 300, scale = 1.7)
 

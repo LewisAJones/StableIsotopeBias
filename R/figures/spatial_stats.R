@@ -10,8 +10,8 @@ stages <- read.csv("https://paleobiodb.org/data1.2/intervals/list.txt?scale_id=1
 periods <- read.csv("https://paleobiodb.org/data1.2/intervals/list.txt?scale_id=1&scale_level=3")
 periods$mid_ma <- (periods$max_ma+periods$min_ma)/2
 #shading data
-s <- seq(2, nrow(stages), 2)
-throwing_shade <- stages[s,]
+s <- seq(2, nrow(periods), 2)
+throwing_shade <- periods[s,]
 #define colours for plots
 col <- c("black")
 #---------------------------------
@@ -19,16 +19,16 @@ col <- c("black")
 data <- read.csv("./results/spatial_stats/stage_level_spatial_stats.csv")
 
 plot_a <- ggplot() +
-  geom_segment(data = periods, mapping=aes(x = min_ma, xend = min_ma, y = -4.5, yend = Inf), linetype = 2, size = 1, color = "grey90") +
-  geom_segment(data = periods, mapping=aes(x = max_ma, xend = max_ma, y = -4.5, yend = Inf), linetype = 2, size = 1, color = "grey90") +
-  geom_rect(data = throwing_shade, mapping=aes(xmin=min_ma, xmax=max_ma, ymin = -4.5, ymax= Inf), linetype = 0, color="grey90", alpha=0.1)  +
+  #geom_segment(data = periods, mapping=aes(x = min_ma, xend = min_ma, y = -4.5, yend = Inf), linetype = 2, size = 1, color = "grey90") +
+  #geom_segment(data = periods, mapping=aes(x = max_ma, xend = max_ma, y = -4.5, yend = Inf), linetype = 2, size = 1, color = "grey90") +
+  geom_rect(data = throwing_shade, mapping=aes(xmin=min_ma, xmax=max_ma, ymin = -6.75, ymax= Inf), linetype = 0, color="grey90", alpha=0.1)  +
   #geom_rect(data = periods, mapping=aes(xmin=300, xmax=0, ymin= -6, ymax= 0), linetype = 1, colour = "black", fill="black", alpha=1)  +
-  geom_rect(data = periods, mapping=aes(xmin = min_ma, xmax = max_ma, ymin = -4.5, ymax = 0), linetype = 1, colour = "black", fill=periods$color, alpha=1)  +
-  geom_text(data = periods, mapping=aes(x = mid_ma, y = -2.25, label = abbrev), size = 3, colour = "black", alpha=1)  +
+  geom_rect(data = periods, mapping=aes(xmin = min_ma, xmax = max_ma, ymin = -6.75, ymax = 0), linetype = 1, colour = "black", fill=periods$color, alpha=1)  +
+  geom_text(data = periods, mapping=aes(x = mid_ma, y = -3.375, label = abbrev), size = 4, colour = "black", alpha=1)  +
+  geom_ribbon(data = data, mapping = aes(x = mid_ma, y = centroid, ymin = LQ_centroid, ymax = UQ_centroid), colour = NA, fill = col[1], size = 0.75, alpha = 0.5) +
   geom_line(data = data, mapping=aes(x = mid_ma, y = centroid), colour = col[1], size = 1.1, alpha  = 0.75) +
-  geom_errorbar(data = data, mapping = aes(x = mid_ma, y = centroid, ymin = LQ_centroid, ymax = UQ_centroid), colour = col[1], size = 0.75, alpha = 0.5) +
   scale_x_reverse(expand=c(0,0), limits = c(541, 0)) +
-  scale_y_continuous(expand=c(0,0), limits = c(-4.5, 90)) +
+  scale_y_continuous(expand=c(0,0), limits = c(-6.75, 90)) +
   labs(x = "", y = expression(bold(paste("Absolute palaeolatitude (",degree,")")))) +
   theme(panel.background = element_blank(),
         plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
@@ -56,15 +56,15 @@ plot_a
 #---------------------------------
 
 plot_b <- ggplot() +
-  geom_segment(data = periods, mapping=aes(x = min_ma, xend = min_ma, y = -2.5, yend = Inf), linetype = 2, size = 1, color = "grey90") +
-  geom_segment(data = periods, mapping=aes(x = max_ma, xend = max_ma, y = -2.5, yend = Inf), linetype = 2, size = 1, color = "grey90") +
-  geom_rect(data = throwing_shade, mapping=aes(xmin=min_ma, xmax=max_ma, ymin = -2.5, ymax= Inf), linetype = 0, color="grey90", alpha=0.1)  +
+  #geom_segment(data = periods, mapping=aes(x = min_ma, xend = min_ma, y = -2.5, yend = Inf), linetype = 2, size = 1, color = "grey90") +
+  #geom_segment(data = periods, mapping=aes(x = max_ma, xend = max_ma, y = -2.5, yend = Inf), linetype = 2, size = 1, color = "grey90") +
+  geom_rect(data = throwing_shade, mapping=aes(xmin=min_ma, xmax=max_ma, ymin = -5.25, ymax= 70), linetype = 0, color="grey90", alpha=0.1)  +
   #geom_rect(data = periods, mapping=aes(xmin=300, xmax=0, ymin= -3, ymax= 0), linetype = 1, colour = "black", fill="black", alpha=1)  +
-  geom_rect(data = periods, mapping=aes(xmin = min_ma, xmax = max_ma, ymin = -2.5, ymax = 0), linetype = 1, colour = "black", fill=periods$color, alpha=1)  +
-  geom_text(data = periods, mapping=aes(x = mid_ma, y = -1.25, label = abbrev), size = 3, colour = "black", alpha=1)  +
+  geom_rect(data = periods, mapping=aes(xmin = min_ma, xmax = max_ma, ymin = -5.25, ymax = 0), linetype = 1, colour = "black", fill=periods$color, alpha=1)  +
+  geom_text(data = periods, mapping=aes(x = mid_ma, y = -2.625, label = abbrev), size = 4, colour = "black", alpha=1)  +
   geom_line(data = data, mapping=aes(x = mid_ma, y = occupancy), colour = col[1], size = 1.1, alpha  = 0.75) +
   scale_x_reverse(expand=c(0,0), limits = c(541, 0)) +
-  scale_y_continuous(expand=c(0,0), limits = c(-2.5, 50)) +
+  scale_y_continuous(expand=c(0,0), limits = c(-5.25, 70)) +
   labs(x = "", y = expression(bold(paste("Occuppied grid cells")))) +
   theme(panel.background = element_blank(),
         plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
@@ -91,15 +91,15 @@ plot_b
 
 #---------------------------------
 plot_c <- ggplot() +
-  geom_segment(data = periods, mapping=aes(x = min_ma, xend = min_ma, y = -2000, yend = Inf), linetype = 2, size = 1, color = "grey90") +
-  geom_segment(data = periods, mapping=aes(x = max_ma, xend = max_ma, y = -2000, yend = Inf), linetype = 2, size = 1, color = "grey90") +
-  geom_rect(data = throwing_shade, mapping=aes(xmin=min_ma, xmax=max_ma, ymin = -2000, ymax= Inf), linetype = 0, color="grey90", alpha=0.1)  +
+  #geom_segment(data = periods, mapping=aes(x = min_ma, xend = min_ma, y = -3000, yend = Inf), linetype = 2, size = 1, color = "grey90") +
+  #geom_segment(data = periods, mapping=aes(x = max_ma, xend = max_ma, y = -3000, yend = Inf), linetype = 2, size = 1, color = "grey90") +
+  geom_rect(data = throwing_shade, mapping=aes(xmin=min_ma, xmax=max_ma, ymin = -3000, ymax= Inf), linetype = 0, color="grey90", alpha=0.1)  +
   #geom_rect(data = periods, mapping=aes(xmin=300, xmax=0, ymin= -2600, ymax= 0), linetype = 1, colour = "black", fill="black", alpha=1)  +
-  geom_rect(data = periods, mapping=aes(xmin = min_ma, xmax = max_ma, ymin = -2000, ymax = 0), linetype = 1, colour = "black", fill=periods$color, alpha=1)  +
-  geom_text(data = periods, mapping=aes(x = mid_ma, y = -1000, label = abbrev), size = 3, colour = "black", alpha=1)  +
+  geom_rect(data = periods, mapping=aes(xmin = min_ma, xmax = max_ma, ymin = -3000, ymax = 0), linetype = 1, colour = "black", fill=periods$color, alpha=1)  +
+  geom_text(data = periods, mapping=aes(x = mid_ma, y = -1500, label = abbrev), size = 4, colour = "black", alpha=1)  +
   geom_line(data = data, mapping=aes(x = mid_ma, y = MST), colour = col[1], size = 1.1, alpha  = 0.75) +
   scale_x_reverse(expand=c(0,0), limits = c(541, 0)) +
-  scale_y_continuous(expand=c(0,0), limits = c(-2000, 40000)) +
+  scale_y_continuous(expand=c(0,0), limits = c(-3000, 40000)) +
   labs(x = "Time (Ma)", y = expression(bold(paste("Summed MST length (km)")))) +
   theme(panel.background = element_blank(),
         plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
