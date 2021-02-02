@@ -5,8 +5,6 @@ source("./R/subscripts/spatial_stats.R")
 rm(list = ls())
 source("./R/subscripts/get_sst_data.R")
 rm(list = ls())
-source("./R/subscripts/extract_sst.R")
-rm(list = ls())
 source("./R/subscripts/get_binned_vals.R")
 rm(list = ls())
 

@@ -23,6 +23,16 @@ data <- data %>% filter(mineralogy %in% c("aragonite","calcite", "Calcite", "apa
 data[which(data$mineralogy == "Calcite"),]$mineralogy <- c("calcite")
 data[which(data$mineralogy == "Aragonite"),]$mineralogy <- c("aragonite")
 
+#correct coordinate errors
+
+#update USA coordinates with longitudes more than 0 longitude
+vec <- which(data$country == "USA" & data$long > 0)
+data[vec,c("long")] <- data[vec,c("long")]*-1
+#update Atlantic coordinates with longitudes in the Adriatic
+vec <- which(data$country == "Atlantic" & data$long == 59.8)
+data[vec,c("long")] <- data[vec,c("long")]*-1
+
+
 #remove unwanted taxonomic groups from dataset
 data <- data %>% filter(!fossil.group %in% c("Reptile", 
                                              "Icthyosaur", 

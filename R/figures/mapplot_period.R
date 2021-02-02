@@ -21,7 +21,7 @@ periodmap <- function(data, width1 = 20, height1 = 15) {
   # transform coordinates from data (chose the correct columns)
   for(i in 1:12) {
     subs <- subset(data, period %in% periodnames_idb[[i]])
-    subs_coord <- unique(cbind(subs$long,subs$lat))
+    subs_coord <- unique(cbind(subs$palaeolng,subs$palaeolat))
     periodcoordinates[[i]] <-  project(subs_coord,proj = "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84")
   }
   # plot the results on paleomaps
