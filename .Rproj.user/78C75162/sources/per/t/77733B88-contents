@@ -20,7 +20,7 @@ source("./R/options.R")
 # Download specific layers to the current directory
 sst <- load_layers(c("BO_sstmean"))
 sst <- sst$BO_sstmean
-sst <- resample(sst, y = raster(res = 1))
+#sst <- resample(sst, y = raster(res = 1))
 
 mean <- rowMeans(as.matrix(sst), na.rm = TRUE)
 sd <- rowSds(as.matrix(sst), na.rm = TRUE)
@@ -35,11 +35,11 @@ plot(sst_artificial)
 writeRaster(sst, "./results/SST/SST_raster.tif", overwrite = TRUE) #save data
 writeRaster(sst_artificial, "./results/SST/SST_artificial.tif", overwrite = TRUE) #save data
 
-p1 <- ggplot(df, aes(x = lats, y = mean)) +
+p1 <- ggplot(df, aes(x = abs(lats), y = mean)) +
   geom_point(colour="black", size = 1.25, alpha=0.7) +
-  stat_smooth(method = "gam", fullrange = TRUE, xseq = seq(-90,90, by=1)) +
-  xlim(-90, 90) +
-  ylim(-5, 40) +
+  stat_smooth(method = "gam", fullrange = TRUE, xseq = seq(0,90, by=1)) +
+  xlim(0, 90) +
+  ylim(0, 40) +
   labs(subtitle = "Modern", x = expression(bold(paste("Latitude (",degree,")"))), y = expression(bold(paste("Sea surface temperature (",degree, C,")")))) +
   theme(panel.background = element_blank(),
         plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
@@ -67,11 +67,11 @@ p1
 
 data <- read.csv("./data/Zhang_temp_data.csv")
 
-p2 <- ggplot(data, aes(x = Paleolatitude, y = MAT)) +
+p2 <- ggplot(data, aes(x = abs(Paleolatitude), y = MAT)) +
   geom_point(colour="black", size = 1.25, alpha=0.7) +
-  stat_smooth(method = "gam", fullrange = TRUE, xseq = seq(-90,90, by=1)) +
-  xlim(-90, 90) +
-  ylim(-5, 40) +
+  stat_smooth(method = "gam", fullrange = TRUE, xseq = seq(0,90, by=1)) +
+  xlim(0, 90) +
+  ylim(0, 40) +
   labs(subtitle = "Late Paleocene-Early Eocene", x = expression(bold(paste("Latitude (",degree,")"))), y = expression(bold(paste("Sea surface temperature (",degree, C,")")))) +
   theme(panel.background = element_blank(),
         plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
@@ -106,5 +106,23 @@ eocene <- ggplot_build(p2)$data[[2]]
 
 write.csv(modern, "./results/SST/modern_temp_grad.csv", row.names = FALSE)
 write.csv(eocene, "./results/SST/eocene_temp_grad.csv", row.names = FALSE)
+
+data <- read.csv("./data/cleaned_StabIsoDB.csv")
+
+data$modern_ext_t <- NA
+
+for(i in 1:nrow(modern)){
+  vec <- which(round(abs(data$palaeolat)) == modern$x[i])
+  data$modern_ext_t[vec] <- modern$x[i]
+}
+
+data$eocene_ext_t <- NA
+
+for(i in 1:nrow(eocene)){
+  vec <- which(round(abs(data$palaeolat)) == eocene$x[i])
+  data$eocene_ext_t[vec] <- eocene$x[i]
+}
+
+write.csv(data, "./results/SST/extracted_temp.csv", row.names = FALSE)
 
 

@@ -5,8 +5,6 @@ library(ggpubr)
 #
 ### Read in transformed map files
 periodmaplisttrans <- readRDS("./R/figures/period_maps_transformed.rds")
-periodmaplisttrans[[13]] <- periodmaplisttrans[[12]] 
-periodmaplisttrans[[12]] <- periodmaplisttrans[[11]] 
 # Define periods
 periodnames <- c("Cambrian", "Ordovician", "Silurian", "Devonian", "Carboniferous", "Permian", "Triassic", "Jurassic", "Cretaceous", "Paleogene", "Neogene", "Quaternary")
 periodnames_idb <- list("Cambrian", "Ordovician", "Silurian", "Devonian", c("Mississippian", "Pennsylvanian"), "Permian", "Triassic", "Jurassic", "Cretaceous", "Paleogene", "Neogene", "Quaternary")

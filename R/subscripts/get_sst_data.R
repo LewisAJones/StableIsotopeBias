@@ -20,7 +20,7 @@ source("./R/options.R")
 # Download specific layers to the current directory
 sst <- load_layers(c("BO_sstmean"))
 sst <- sst$BO_sstmean
-sst <- resample(sst, y = raster(res = 1))
+#sst <- resample(sst, y = raster(res = 1))
 
 mean <- rowMeans(as.matrix(sst), na.rm = TRUE)
 sd <- rowSds(as.matrix(sst), na.rm = TRUE)
