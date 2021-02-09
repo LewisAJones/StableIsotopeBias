@@ -102,7 +102,9 @@ p <- ggarrange(p1, p2, ncol=1, nrow=2, widths = c(1,1), labels = "AUTO", align =
 ggsave(file = "./results/SST/sst_gradient.png", plot = p, width = 150, height = 150, units = "mm", dpi = 300, scale = 1.7)
 
 modern <- ggplot_build(p1)$data[[2]]
+global_modern <- mean(modern$y, na.rm = TRUE)
 eocene <- ggplot_build(p2)$data[[2]]
+global_eocene <- mean(eocene$y, na.rm = TRUE)
 
 write.csv(modern, "./results/SST/modern_temp_grad.csv", row.names = FALSE)
 write.csv(eocene, "./results/SST/eocene_temp_grad.csv", row.names = FALSE)
