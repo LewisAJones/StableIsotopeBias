@@ -23,14 +23,14 @@ stage_vals$mid_ma <- (stage_vals$max_ma + stage_vals$min_ma)/2
 p1 <- ggplot() +
   #geom_segment(data = periods, mapping=aes(x = min_ma, xend = min_ma, y = -6, yend = Inf), linetype = 2, size = 1, color = "grey90") +
   #geom_segment(data = periods, mapping=aes(x = max_ma, xend = max_ma, y = -6, yend = Inf), linetype = 2, size = 1, color = "grey90") +
-  geom_segment(data = periods, mapping=aes(x = 0, xend = 541, y = data$modern_temp_mean[1], yend = data$modern_temp_mean[1]), linetype = 1, size = 1, color = "royalblue1") +
+  #geom_segment(data = periods, mapping=aes(x = 0, xend = 541, y = data$modern_ext_t[1], yend = data$modern_temp_mean[1]), linetype = 1, size = 1, color = "royalblue1") +
   geom_rect(data = throwing_shade, mapping=aes(xmin=min_ma, xmax=max_ma, ymin = -6, ymax= Inf), linetype = 0, color="grey90", alpha=0.1)  +
   #geom_rect(data = periods, mapping=aes(xmin=300, xmax=0, ymin= -6, ymax= 0), linetype = 1, colour = "black", fill="black", alpha=1)  +
   geom_rect(data = periods, mapping=aes(xmin = min_ma, xmax = max_ma, ymin = -6, ymax = -2), linetype = 1, colour = "black", fill=periods$color, alpha=1)  +
   geom_text(data = periods, mapping=aes(x = mid_ma, y = -4, label = abbrev), colour = "black", alpha=1)  +
-  geom_point(data = data, mapping=aes(x = age, y = modern_temp_ext), colour = "darkgrey", size = 1.1, alpha  = 1) +
-  geom_point(data = stage_vals, mapping=aes(x = mid_ma, y = ext_temperature), colour = "black", size = 1.1, alpha  = 1) +
-  geom_line(data = stage_vals, mapping=aes(x = mid_ma, y = ext_temperature), colour = "black", size = 1.1, alpha  = 1) +
+  geom_point(data = data, mapping=aes(x = Age..Ma., y = modern_ext_t), colour = "darkgrey", size = 1.1, alpha  = 1) +
+  geom_point(data = stage_vals, mapping=aes(x = mid_ma, y = ext_temperature_stage_modern), colour = "black", size = 1.1, alpha  = 1) +
+  geom_line(data = stage_vals, mapping=aes(x = mid_ma, y = ext_temperature_stage_modern), colour = "black", size = 1.1, alpha  = 1) +
   #geom_smooth(data = data, mapping=aes(x = age, y = modern_temp_ext), colour = "red", size = 1.1, alpha  = 0.75) +
   scale_x_reverse(expand=c(0,0), limits = c(541, 0)) +
   scale_y_continuous(expand=c(0,0), limits = c(-6, 65)) +
@@ -61,14 +61,14 @@ p1
 p2 <- ggplot() +
   #geom_segment(data = periods, mapping=aes(x = min_ma, xend = min_ma, y = -6, yend = Inf), linetype = 2, size = 1, color = "grey90") +
   #geom_segment(data = periods, mapping=aes(x = max_ma, xend = max_ma, y = -6, yend = Inf), linetype = 2, size = 1, color = "grey90") +
-  geom_segment(data = periods, mapping=aes(x = 0, xend = 541, y = data$modern_temp_mean[1], yend = data$modern_temp_mean[1]), linetype = 1, size = 1, color = "royalblue1") +
+  #geom_segment(data = periods, mapping=aes(x = 0, xend = 541, y = data$modern_temp_mean[1], yend = data$modern_temp_mean[1]), linetype = 1, size = 1, color = "royalblue1") +
   geom_rect(data = throwing_shade, mapping=aes(xmin=min_ma, xmax=max_ma, ymin = -6, ymax= Inf), linetype = 0, color="grey90", alpha=0.1)  +
   #geom_rect(data = periods, mapping=aes(xmin=300, xmax=0, ymin= -6, ymax= 0), linetype = 1, colour = "black", fill="black", alpha=1)  +
   geom_rect(data = periods, mapping=aes(xmin = min_ma, xmax = max_ma, ymin = -6, ymax = -2), linetype = 1, colour = "black", fill=periods$color, alpha=1)  +
   geom_text(data = periods, mapping=aes(x = mid_ma, y = -4, label = abbrev), colour = "black", alpha=1)  +
-  geom_point(data = data, mapping=aes(x = age, y = temperature), colour = "darkgrey", size = 1.1, alpha  = 1) +
-  geom_point(data = stage_vals, mapping=aes(x = mid_ma, y = temperature), colour = "black", size = 1.1, alpha  = 1) +
-  geom_line(data = stage_vals, mapping=aes(x = mid_ma, y = temperature), colour = "black", size = 1.1, alpha  = 1) +
+  geom_point(data = data, mapping=aes(x = Age..Ma., y = T.2010...), colour = "darkgrey", size = 1.1, alpha  = 1) +
+  geom_point(data = stage_vals, mapping=aes(x = mid_ma, y = temperature_stage), colour = "black", size = 1.1, alpha  = 1) +
+  geom_line(data = stage_vals, mapping=aes(x = mid_ma, y = temperature_stage), colour = "black", size = 1.1, alpha  = 1) +
   #geom_smooth(data = data, mapping=aes(x = age, y = temperature), method = "loess", colour = "red", size = 1.1, alpha  = 0.75) +
   scale_x_reverse(expand=c(0,0), limits = c(541, 0)) +
   scale_y_continuous(expand=c(0,0), limits = c(-6, 65)) +

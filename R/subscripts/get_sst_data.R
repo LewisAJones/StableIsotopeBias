@@ -107,20 +107,20 @@ eocene <- ggplot_build(p2)$data[[2]]
 write.csv(modern, "./results/SST/modern_temp_grad.csv", row.names = FALSE)
 write.csv(eocene, "./results/SST/eocene_temp_grad.csv", row.names = FALSE)
 
-data <- read.csv("./data/cleaned_StabIsoDB.csv")
+data <- read.csv("./data/song_isotope.csv")
 
 data$modern_ext_t <- NA
 
 for(i in 1:nrow(modern)){
-  vec <- which(round(abs(data$palaeolat)) == modern$x[i])
-  data$modern_ext_t[vec] <- modern$x[i]
+  vec <- which(round(abs(data$Paleolatitude)) == modern$x[i])
+  data$modern_ext_t[vec] <- modern$y[i]
 }
 
 data$eocene_ext_t <- NA
 
 for(i in 1:nrow(eocene)){
-  vec <- which(round(abs(data$palaeolat)) == eocene$x[i])
-  data$eocene_ext_t[vec] <- eocene$x[i]
+  vec <- which(round(abs(data$Paleolatitude)) == eocene$x[i])
+  data$eocene_ext_t[vec] <- eocene$y[i]
 }
 
 write.csv(data, "./results/SST/extracted_temp.csv", row.names = FALSE)
