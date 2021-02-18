@@ -1,0 +1,7 @@
+data <- read.csv("C:\\Users/Lewis Jones/OneDrive/StableIsotopeBias/data/raw_data/Cleaned_Veizer_08_02_2021.csv")
+
+kilian <- data[sample(nrow(data), 50), ]
+lewis <- data[sample(nrow(data), 50), ]
+
+write.csv(kilian, "C:\\Users/Lewis Jones/OneDrive/StableIsotopeBias/data/raw_data/kilian_random_sample.csv", row.names = FALSE)
+write.csv(lewis, "C:\\Users/Lewis Jones/OneDrive/StableIsotopeBias/data/raw_data/lewis_random_sample.csv", row.names = FALSE)
