@@ -4,7 +4,7 @@
 library(dplyr)
 library(pbapply)
 library(chronosphere)
-source("./R/functions/palaeorotate.R")
+#source("./R/functions/palaeorotate.R")
 source("./R/functions/calculate_T.R")
 ######################
 #load data
@@ -31,19 +31,19 @@ pm <- fetch("paleomap", "model", datadir="./data/") #download plate model
 uniq <- unique(data[,c("lon", "lat", "rounded_age")])
 
 rotations <- data.frame(t(pbsapply(1:nrow(uniq), function(i) {
-  coords <- palaeorotate(lng = uniq$lon[i], lat = uniq$lat[i], age = uniq$rounded_age[i])
-  #coords <-   reconstruct(x = uniq[i, c("lon", "lat")], #coordinates of data
-  #                        age = uniq$rounded_age[i], #age of data 
-  #                        model=pm, #plate model
-  #                        dir = "./data/", #directory of plate model
-  #                        path.gplates="C:/Program Files/GPlates/GPlates 2.2.0/gplates-2.2.0.exe",
-  #                        cleanup = TRUE,
-  #                        verbose = TRUE) 
+  #coords <- palaeorotate(lng = uniq$lon[i], lat = uniq$lat[i], age = uniq$rounded_age[i])
+  coords <-   reconstruct(x = uniq[i, c("lon", "lat")], #coordinates of data
+                          age = uniq$rounded_age[i], #age of data 
+                          model=pm, #plate model
+                          dir = "./data/", #directory of plate model
+                          path.gplates="C:/Program Files/GPlates/GPlates 2.2.0/gplates-2.2.0.exe",
+                          cleanup = TRUE,
+                          verbose = TRUE) 
   
-  #files <- list.files("./data/", full.names = TRUE)
-  #files <- files[files != c("./data/Cleaned_Veizer_15_02_2021.csv")]
-  #files <- files[files != c("./data/stage_bins.csv")]
-  #do.call(file.remove, list(files))
+  files <- list.files("./data/", full.names = TRUE)
+  files <- files[files != c("./data/Cleaned_Veizer_15_02_2021.csv")]
+  files <- files[files != c("./data/stage_bins.csv")]
+  do.call(file.remove, list(files))
   coords <- round(coords, digits = 2)
   coords
   
