@@ -36,9 +36,9 @@ rotations <- data.frame(t(pbsapply(1:nrow(uniq), function(i) {
                           age = uniq$rounded_age[i], #age of data 
                           model=pm, #plate model
                           dir = "./data/", #directory of plate model
-                          path.gplates="C:/Program Files/GPlates/GPlates 2.2.0/gplates-2.2.0.exe",
+                          path.gplates="C:/Program Files (x86)/GPlates/GPlates 2.2.0/gplates-2.2.0.exe",
                           cleanup = TRUE,
-                          verbose = TRUE) 
+                          verbose = FALSE) 
   
   files <- list.files("./data/", full.names = TRUE)
   files <- files[files != c("./data/Cleaned_Veizer_15_02_2021.csv")]
@@ -53,7 +53,7 @@ colnames(rotations) <- c("palaeolng", "palaeolat")
 
 rotations <- cbind.data.frame(uniq, rotations)
 
-data <- plyr::join(x = data, y = rotations, type = "full", by = c("lon" = "long", "lat" = "lat", "rounded_age" = "rounded_age"), match = "all")
+data <- plyr::join(x = data, y = rotations, type = "full", by = c("lon" = "lon", "lat" = "lat", "rounded_age" = "rounded_age"), match = "all")
 
 stages <- read.csv("./data/stage_bins.csv")
 
