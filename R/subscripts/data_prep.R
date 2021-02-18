@@ -60,7 +60,7 @@ stages <- read.csv("./data/stage_bins.csv")
 data$mid_ma <- NA
 
 for(i in 1:nrow(stages)){
-  vec <- which(data$age <= stages$max_ma[i] & data$age >= stages$min_ma[i])
+  vec <- which(data$gts2012 <= stages$max_ma[i] & data$gts2012 >= stages$min_ma[i])
   data$mid_ma[vec] <- stages$mid_ma[i]
 }
 
