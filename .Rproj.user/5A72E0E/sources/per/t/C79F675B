@@ -1,0 +1,24 @@
+{
+    "id": "C79F675B",
+    "path": "~/GitHub/StableIsotopeBias/R/figures/mapplot_period.R",
+    "project_path": "R/figures/mapplot_period.R",
+    "type": "r_source",
+    "hash": "2691537215",
+    "contents": "",
+    "dirty": false,
+    "created": 1612023244873.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "cursorPosition": "48,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1612023255,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1612023255680,
+    "read_only": false,
+    "read_only_alternatives": []
+}

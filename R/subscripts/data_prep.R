@@ -8,7 +8,7 @@ library(chronosphere)
 source("./R/functions/calculate_T.R")
 ######################
 #load data
-data <- read.csv("./data/Cleaned_Veizer_15_02_2021.csv")
+data <- read.csv("./data/Cleaned_Veizer_19_02_2021.csv")
 
 #remove data without coordinates
 data <- subset(data, !is.na(lat) & !is.na(lon))
