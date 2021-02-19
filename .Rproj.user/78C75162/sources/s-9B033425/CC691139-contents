@@ -1,5 +1,0 @@
-library(rgdal)
-
-wmap <- readOGR(dsn="./data/vzf_139.shp", layer="vzf_139")
-wmap
-plot(wmap)
