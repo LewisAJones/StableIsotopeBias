@@ -8,8 +8,8 @@ stages$ext_temperature_stage_modern <- NA
 stages$ext_temperature_stage_eocene <- NA
 #calcualte mean temperature 
 for(i in 1:nrow(stages)){
-  out <- subset(data, Age..Ma. <= stages$max_ma[i] & Age..Ma. >= stages$min_ma[i])
-  stages$temperature_stage[i] <- mean(out$T.2010..., na.rm = TRUE)
+  out <- subset(data, gts2012 <= stages$max_ma[i] & gts2012 >= stages$min_ma[i])
+  stages$temperature_stage[i] <- mean(out$temperature, na.rm = TRUE)
   stages$ext_temperature_stage_modern[i] <- mean(out$modern_ext_t, na.rm = TRUE)
   stages$ext_temperature_stage_eocene[i] <- mean(out$eocene_ext_t, na.rm = TRUE)
 }

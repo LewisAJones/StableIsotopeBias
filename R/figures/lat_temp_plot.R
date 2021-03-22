@@ -5,33 +5,22 @@ library(ggpubr)
 library(raster)
 library(matrixStats)
 #---------------------------------
-res <- raster(res = 0.1)
-modern <- raster("./data/layers/Pre_industrial.nc")
-albian <- raster("./data/layers/Albian.nc")
+modern <- read.csv("./results/SST/modern_temp_grad.csv")
+modern <- rbind.data.frame(modern, modern)
+modern$x[92:182] <- modern$x[92:182] * -1
+eocene <- read.csv("./results/SST/eocene_temp_grad.csv")
+eocene <- rbind.data.frame(eocene, eocene)
+eocene$x[92:182] <- eocene$x[92:182] * -1
 
-modern <- resample(modern, res)
-albian <- resample(albian, res)
-
-vals_mean_modern <- sapply(1:nrow(modern), function(x){mean(modern[x,], na.rm = TRUE)})
-vals_sd_modern <- sapply(1:nrow(modern), function(x){sd(modern[x,], na.rm = TRUE)})
-
-vals_mean_albian <- sapply(1:nrow(albian), function(x){mean(albian[x,], na.rm = TRUE)})
-vals_sd_albian <- sapply(1:nrow(albian), function(x){sd(albian[x,], na.rm = TRUE)})
-
-lats <- seq(-90, 90, by = res(albian)[1])
-lats <- lats[1:length(lats)-1]
-
-data <- cbind.data.frame(lats, vals_mean_modern, vals_sd_modern, vals_mean_albian, vals_sd_albian)
-
-p1 <- ggplot() +
-  geom_ribbon(data = data, mapping=aes(x = lats, ymin = vals_mean_modern - vals_sd_modern, ymax = vals_mean_modern + vals_sd_modern), colour = "#b10026", fill = "#b10026", size = 1.1, alpha  = 0.7) +
-  geom_ribbon(data = data, mapping=aes(x = lats, ymin = vals_mean_albian - vals_sd_albian, ymax = vals_mean_albian + vals_sd_albian), colour = "#084594", fill = "#084594", size = 1.1, alpha  = 0.7) +
-  geom_point(data = data, mapping=aes(x = lats, y = vals_mean_modern, colour = "#b10026"), size = 1.1, alpha  = 1) +
-  geom_line(data = data, mapping=aes(x = lats, y = vals_mean_modern, colour = "#b10026"), size = 1.1, alpha  = 1) +
-  geom_point(data = data, mapping=aes(x = lats, y = vals_mean_albian,  colour = "#084594"), size = 1.1, alpha  = 1) +
-  geom_line(data = data, mapping=aes(x = lats, y = vals_mean_albian, colour = "#084594"), size = 1.1, alpha  = 1) +
-  scale_color_manual(values = c("#084594", "#b10026"), labels = c("Albian", "Modern")) +
-  scale_x_reverse(expand=c(0,0)) +
+p <- ggplot() +
+  geom_ribbon(data = eocene, mapping=aes(x = x, ymin = ymin, ymax = ymax), colour = "#b10026", fill = "#b10026", size = 1.1, alpha  = 0.7) +
+  geom_ribbon(data = modern, mapping=aes(x = x, ymin = ymin, ymax = ymax), colour = "#084594", fill = "#084594", size = 1.1, alpha  = 0.7) +
+  #geom_point(data = modern, mapping=aes(x = x, y = y, colour = "#b10026"), size = 1.1, alpha  = 1) +
+  geom_line(data = modern, mapping=aes(x = x, y = y, colour = "#b10026"), size = 1.1, alpha  = 1) +
+  #geom_point(data = eocene, mapping=aes(x = x, y = y,  colour = "#084594"), size = 1.1, alpha  = 1) +
+  geom_line(data = eocene, mapping=aes(x = x, y = y, colour = "#084594"), size = 1.1, alpha  = 1) +
+  scale_color_manual(values = c("#b10026","#084594"), labels = c("Eocene", "Modern")) +
+  scale_x_reverse(expand=c(0,0), limits = c(95, -95)) +
   labs(x = expression(bold(paste("Latitude (",degree,")"))), y = expression(bold(paste("Sea surface temperature (",degree, C,")")))) +
   theme(panel.background = element_blank(),
         plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
@@ -39,7 +28,7 @@ p1 <- ggplot() +
         panel.grid.minor.x = element_line(colour = "grey90"),
         panel.grid.major.y = element_line(colour = "grey90"),
         panel.grid.major.x = element_line(colour = "grey90"),
-        legend.position = "top",
+        legend.position = c(0.1, 0.9),
         #legend.background = element_blank(),
         #legend.box.background = element_rect(colour = NA, fill = NA),
         #legend.key = element_blank(),
@@ -54,6 +43,6 @@ p1 <- ggplot() +
         axis.title.x = element_text(size = 14, face = "bold", vjust = -1),
         plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
         aspect.ratio = 0.6)
-p1
+p
 
-ggsave("./figures/lat_temp_plot.png", plot = p1, width = 300, height = 200, dpi = 300, units = c("mm"))
+ggsave("./figures/lat_temp_plot.png", plot = p, width = 200, height = 130, dpi = 300, units = c("mm"))
