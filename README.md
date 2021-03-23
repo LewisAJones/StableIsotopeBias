@@ -36,7 +36,7 @@ This script runs the analyses.
 The data is organised in the folder "results" as follows:
 
 * **./results/SST/**
-This folder contains the data related to model temperature gradients, and global temperature estimates.
+This folder contains the data related to model temperature gradients and global temperature estimates.
 
 * **./results/spatial_stats/**
 This folder contains the data related to summary spatial statistics.
