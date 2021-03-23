@@ -3,7 +3,7 @@
     "path": "~/GitHub/StableIsotopeBias/README.md",
     "project_path": "README.md",
     "type": "markdown",
-    "hash": "2602039331",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1616506452144.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "10,81",
+        "cursorPosition": "2,173",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1616506924,
+    "lastKnownWriteTime": 1616507028,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1616506924454,
+    "last_content_update": 1616507028990,
     "read_only": false,
     "read_only_alternatives": []
 }
