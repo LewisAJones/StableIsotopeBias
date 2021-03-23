@@ -28,6 +28,7 @@ p1 <- ggplot() +
   geom_point(data = data, mapping=aes(x = gts2012, y = temperature), colour = "darkgrey", size = 1.1, alpha  = 1) +
   geom_point(data = stage_vals, mapping=aes(x = mid_ma, y = temperature_stage), colour = "black", size = 1.1, alpha  = 1) +
   geom_line(data = stage_vals, mapping=aes(x = mid_ma, y = temperature_stage), colour = "black", size = 1.1, alpha  = 1) +
+  #geom_hline(data = NULL, mapping=aes(yintercept = 17.84), colour = "#0570b0", linetype = "dashed", size = 1, alpha = 1) +
   scale_x_reverse(expand=c(0,0), limits = c(541, 0)) +
   scale_y_continuous(expand=c(0,0), limits = c(-8, 65)) +
   labs(x = "", y = expression(bold(paste("Temperature (",degree, C,")"))), subtitle = "Veizer data") +
