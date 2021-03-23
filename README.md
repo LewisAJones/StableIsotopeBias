@@ -8,6 +8,6 @@ To cite the paper:
 > Lewis A. Jones, Kilian Eichenseer, and Claire Veillard. 2021. Uneven spatial sampling in Phanerozoic palaeotemperature curves. (TBC).
 
 <p align="center">
-  <img src="https://github.com/LewisAJones/StableIsotopeBias/blob/master/figures/workflow.png" alt="" width="400"/>
+  <img src="https://github.com/LewisAJones/StableIsotopeBias/blob/main/figures/workflow.png" alt="" width="400"/>
 </p>
  
