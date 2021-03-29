@@ -1,0 +1,5 @@
+
+itemp <- read.csv("./results/SST/binned_vals.csv")
+table(as.numeric(itemp$ext_temperature_stage_modern > 17.84) == as.numeric(itemp$ext_temperature_stage_eocene > 27.58))
+table(as.numeric(itemp$ext_temperature_stage_modern > 17.84))
+table(as.numeric(itemp$ext_temperature_stage_eocene > 27.58))
