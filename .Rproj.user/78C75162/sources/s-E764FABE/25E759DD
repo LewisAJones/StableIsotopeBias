@@ -1,27 +1,27 @@
 {
-    "id": "6ACC03FB",
-    "path": "~/GitHub/StableIsotopeBias/R/figures/map_plots_raster.R",
-    "project_path": "R/figures/map_plots_raster.R",
+    "id": "25E759DD",
+    "path": "~/GitHub/StableIsotopeBias/R/figures/continent_terrestrial_plot.R",
+    "project_path": "R/figures/continent_terrestrial_plot.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1617019819612.0,
+    "created": 1617379820638.0,
     "source_on_save": false,
     "relative_order": 5,
     "properties": {
-        "tempName": "Untitled3",
+        "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "73,0",
-        "scrollLine": "46"
+        "cursorPosition": "83,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1616446169,
+    "lastKnownWriteTime": 1617381660,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1616446169,
+    "last_content_update": 1617381660475,
     "read_only": false,
     "read_only_alternatives": []
 }

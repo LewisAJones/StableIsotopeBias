@@ -66,15 +66,15 @@ regrange_ols <- seq(min(x,na.rm =T)-1,max(x, na.rm =T)+1,0.02)
 ### Plot
 #
 #windows(6,6)
-png("./figures/linear_models.png", width = 150, height = 200, res = 300, units = "mm")
-par(mfrow = c(2,1), mar = c(4.5,4.5,1,1), mgp = c(2.25,0.75,0), las = 1)
+png("./figures/linear_models.png", width = 300, height = 120, res = 300, units = "mm")
+par(mfrow = c(1,2), mar = c(4.5,4.5,1,1), mgp = c(2.25,0.75,0), las = 1)
 #
 #
 # A - with all data:
 #
 plot(ispat$mean,itemp$temperature_stage, xlab = expression("Absolute palaeolatitudinal centroid ("*degree*")"), 
      ylab = expression("Global mean temperature ( "*degree~"C)"), main = "", pch = 21, bg = stagecol, cex = 1.2, 
-     type = "n", xlim = c(-2,57), xaxs = "i", cex.lab = 0.85, cex.axis = 0.85)
+     type = "n", xlim = c(-2,57), xaxs = "i", cex.lab = 1.2, cex.axis = 1)
 #
 # plot confidence interval of GLS
 error_polygon(prediction95$fit+2*prediction95$se.fit,prediction95$fit-2*prediction95$se.fit,regrange[1],regrange[length(regrange)],
@@ -97,7 +97,7 @@ lines(c(28.5,31.5),c(38.6,38.6),lty=2)
 lines(c(28.5,31.5),c(35.8,35.8),lty=1, lwd = 2)
 # 
 # Add "A"
-text(-10,43,expression(bold("A")),xpd = T)
+text(-10,43,expression(bold("A")),xpd = T, cex = 2)
 #
 # 
 ### Preparation for B
@@ -138,7 +138,7 @@ regrange_ols <- seq(min(x,na.rm =T)-1,max(x, na.rm =T)+1,0.02)
 #
 plot(ispat$mean,itemp$temperature_stage, xlab = expression("Absolute palaeolatitudinal centroid ("*degree*")"), 
      ylab = expression("Global mean temperature ( "*degree~"C)"), main = "", pch = 21, bg = stagecol, cex = 1.2, 
-     type = "n", xlim = c(-2,57), xaxs = "i", cex.lab = 0.85, cex.axis = 0.85)
+     type = "n", xlim = c(-2,57), xaxs = "i", cex.lab = 1.2, cex.axis = 1)
 #
 # plot confidence interval of GLS
 error_polygon(prediction95$fit+2*prediction95$se.fit,prediction95$fit-2*prediction95$se.fit,regrange[1],regrange[length(regrange)],
@@ -164,5 +164,5 @@ lines(c(28.5,31.5),c(35.8,35.8),lty=1, lwd = 2)
 
 # 
 # Add "B"
-text(-10,43,expression(bold("B")),xpd = T)
+text(-10,43,expression(bold("B")),xpd = T, cex = 2)
 dev.off()
