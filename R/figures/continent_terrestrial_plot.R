@@ -50,7 +50,7 @@ p1 <- ggplot() +
   geom_rect(data = throwing_shade, mapping=aes(xmin=min_ma, xmax=max_ma, ymin = -105, ymax= Inf), linetype = 0, color="grey90", alpha=0.1)  +
   geom_rect(data = periods, mapping=aes(xmin = min_ma, xmax = max_ma, ymin = -105, ymax = -90), linetype = 1, colour = "black", fill=periods$color, alpha=1)  +
   geom_text(data = periods, mapping=aes(x = mid_ma, y = -97.5, label = abbrev), colour = "black", alpha=1)  +
-  geom_point(data = data, mapping=aes(x = gts2012, y = palaeolat, fill = continent), shape = 21, colour = "black", size = 1.5, alpha  = 0.75) +
+  geom_point(data = data, mapping=aes(x = gts2012, y = palaeolat, fill = continent), shape = 21, colour = "black", size = 1.75, alpha  = 0.75) +
   #geom_point(data = stage_vals, mapping=aes(x = mid_ma, y = temperature_stage), colour = "black", size = 1.1, alpha  = 1) +
   #geom_line(data = stage_vals, mapping=aes(x = mid_ma, y = temperature_stage), colour = "black", size = 1.1, alpha  = 1) +
   #geom_hline(data = NULL, mapping=aes(yintercept = 17.84), colour = "#0570b0", linetype = "dashed", size = 1, alpha = 1) +
@@ -71,7 +71,7 @@ p1 <- ggplot() +
         panel.border = element_rect(colour = "black", fill = NA),
         axis.text.x = element_text(size = 14, angle = 0, hjust = 0.5),
         axis.text.y = element_text(size = 14, angle = 0, hjust = 0),
-        axis.title.y = element_text(size = 14, face = "bold", vjust = 4),
+        axis.title.y = element_text(size = 14, face = "bold", vjust = 4, hjust = 0.6),
         axis.title.y.right = element_text(size = 14, face = "bold", vjust = 4),
         axis.title.x = element_text(size = 14, face = "bold", vjust = -1),
         plot.title = element_text(size = 16, face = "bold", hjust = 0.5),

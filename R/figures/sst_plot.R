@@ -61,7 +61,7 @@ p2 <- ggplot() +
   geom_line(data = stage_vals, mapping=aes(x = mid_ma, y = ext_temperature_stage_modern), colour = "#0570b0", size = 1.1, alpha  = 1) +
   scale_x_reverse(expand=c(0,0), limits = c(541, 0)) +
   scale_y_continuous(expand=c(0,0), limits = c(-5, 30)) +
-  labs(x = "", y = "", subtitle = "Extracted Modern") +
+  labs(x = "", y = "", subtitle = "Extracted Modern-type") +
   theme(panel.background = element_blank(),
         plot.margin = margin(0.25,0.5,0.25,0.5, "cm"),
         legend.position = c(0.2, 0.9),
@@ -91,7 +91,7 @@ p3 <- ggplot() +
   geom_line(data = stage_vals, mapping=aes(x = mid_ma, y = ext_temperature_stage_eocene), colour = "#b10026", size = 1.1, alpha  = 1) +
   scale_x_reverse(expand=c(0,0), limits = c(541, 0)) +
   scale_y_continuous(expand=c(0,0), limits = c(18.5, 35)) +
-  labs(x = "Time (Ma)", y = expression(bold(paste("Temperature (",degree, C,")"))), subtitle = "Extracted Eocene") +
+  labs(x = "Time (Ma)", y = expression(bold(paste("Temperature (",degree, C,")"))), subtitle = "Extracted Eocene-type") +
   theme(panel.background = element_blank(),
         plot.margin = margin(0.25,0.5,0.25,0.5, "cm"),
         legend.position = c(0.2, 0.9),
