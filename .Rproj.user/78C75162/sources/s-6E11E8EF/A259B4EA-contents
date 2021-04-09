@@ -1,6 +1,6 @@
 # Uneven spatial sampling distorts reconstructions of Phanerozoic temperature
 
-Author(s): [Lewis A. Jones](mailto:LewisA.Jones@outlook.com), [Kilian Eichenseer](mailto:kilian.eichenseer@fau.de)
+Author(s): [Lewis A. Jones](mailto:LewisA.Jones@outlook.com) and [Kilian Eichenseer](mailto:kilian.eichenseer@fau.de)
 
 This repository contains the data and code required to run the analyses and results of the article, "Uneven spatial sampling distorts reconstructions of Phanerozoic temperature" (Jones and Eichenseer, 2021). 
 
