@@ -1,4 +1,4 @@
-# Uneven spatial sampling in Phanerozoic palaeotemperature curves
+# Uneven spatial sampling distorts reconstructions of Phanerozoic temperature
 
 Author(s): [Lewis A. Jones](mailto:LewisA.Jones@outlook.com), [Kilian Eichenseer](mailto:kilian.eichenseer@fau.de)
 
