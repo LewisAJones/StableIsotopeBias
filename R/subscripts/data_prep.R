@@ -26,32 +26,37 @@ data$temperature <- sapply(1:nrow(data), function(x)
 data$rounded_age <- round(data$gts2012)
 
 #palaeorotate coordinates
-pm <- fetch("paleomap", "model", datadir="./data/") #download plate model
+pm <- fetch("paleomap", "model", datadir="./data/model/") #download plate model
 
 uniq <- unique(data[,c("lon", "lat", "rounded_age")])
+ages <- unique(uniq$rounded_age)
 
-rotations <- data.frame(t(pbsapply(1:nrow(uniq), function(i) {
-  #coords <- palaeorotate(lng = uniq$lon[i], lat = uniq$lat[i], age = uniq$rounded_age[i])
-  coords <-   reconstruct(x = uniq[i, c("lon", "lat")], #coordinates of data
-                          age = uniq$rounded_age[i], #age of data 
+rotations <- pblapply(1:length(ages), function(i) {
+  rot_age <- ages[i]
+  rot_coords <- subset(uniq, rounded_age == rot_age)[, c("lon", "lat")]
+  coords <-   reconstruct(x = rot_coords, #coordinates of data
+                          age = rot_age, #age of data 
                           model=pm, #plate model
-                          dir = "./data/", #directory of plate model
-                          path.gplates="C:/Program Files (x86)/GPlates/GPlates 2.2.0/gplates-2.2.0.exe",
+                          dir = "./data/model/", #directory of plate model
+                          #path.gplates="/Volumes/GPlates-2.2.0-Darwin-x86_64/",
                           cleanup = TRUE,
                           verbose = FALSE) 
   
-  files <- list.files("./data/", full.names = TRUE)
-  files <- files[files != c("./data/Cleaned_Veizer_15_02_2021.csv")]
-  files <- files[files != c("./data/stage_bins.csv")]
+  files <- list.files("./data/model/", full.names = TRUE)
   do.call(file.remove, list(files))
   coords <- round(coords, digits = 2)
+  colnames(coords) <- c("palaeolng", "palaeolat")
+  coords <- data.frame(coords)
+  coords$rounded_age <- rot_age
   coords
   
-}, simplify = TRUE)))
+})
 
-colnames(rotations) <- c("palaeolng", "palaeolat")
+rotations <- dplyr::bind_rows(rotations)
 
 rotations <- cbind.data.frame(uniq, rotations)
+
+rotations <- rotations[,-6]
 
 data <- plyr::join(x = data, y = rotations, type = "full", by = c("lon" = "lon", "lat" = "lat", "rounded_age" = "rounded_age"), match = "all")
 
@@ -65,5 +70,14 @@ for(i in 1:nrow(stages)){
 }
 
 data <- plyr::join(x = data, y = stages, type = "full", by = c("mid_ma"), match = "all")
+
+myr10 <- seq(from = 0, to = 510, by = 10)
+
+data$mid_ma_10myr <- NA
+
+for(i in 1:length(myr10)){
+  vec <- which(data$gts2012 >= myr10[i] & data$gts2012 <= myr10[i+1])
+  data$mid_ma_10myr[vec] <- (myr10[i] + myr10[i+1])/2
+}
 
 write.csv(data, "./data/rotated_Veizer_data.csv", row.names = FALSE)
