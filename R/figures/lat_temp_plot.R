@@ -43,7 +43,7 @@ p <- ggplot() +
         aspect.ratio = 0.6)
 p
 
-ggsave("./figures/lat_temp_single_plot.png", plot = p, width = 200, height = 130, dpi = 300, units = c("mm"))
+ggsave("./figures/lat_temp_single_plot.jpg", plot = p, width = 200, height = 130, dpi = 300, units = c("mm"), scale = 0.8)
 
 modern <- rbind.data.frame(modern, modern)
 modern$x[92:182] <- modern$x[92:182] * -1
@@ -83,4 +83,4 @@ p <- ggplot() +
         aspect.ratio = 0.6)
 p
 
-ggsave("./figures/lat_temp_plot.png", plot = p, width = 200, height = 130, dpi = 300, units = c("mm"))
+ggsave("./figures/lat_temp_plot.jpg", plot = p, width = 200, height = 130, dpi = 300, units = c("mm"))

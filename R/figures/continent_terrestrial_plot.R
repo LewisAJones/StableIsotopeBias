@@ -79,5 +79,5 @@ p1 <- ggplot() +
 
 p1
 
-ggsave(file = "./figures/terrestrial_data.png", plot = p1, width = 150, height = 95, units = "mm", dpi = 300, scale = 1.2)
+ggsave(file = "./figures/terrestrial_data.jpg", plot = p1, width = 150, height = 95, units = "mm", dpi = 300, scale = 1.2)
 

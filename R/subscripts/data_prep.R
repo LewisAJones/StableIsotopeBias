@@ -4,11 +4,10 @@
 library(dplyr)
 library(pbapply)
 library(chronosphere)
-#source("./R/functions/palaeorotate.R")
 source("./R/functions/calculate_T.R")
 ######################
 #load data
-data <- read.csv("./data/Cleaned_Veizer_19_02_2021.csv")
+data <- read.csv("./data/Cleaned_Veizer_Centroid.csv")
 
 #remove data without coordinates
 data <- subset(data, !is.na(lat) & !is.na(lon))
@@ -48,15 +47,12 @@ rotations <- pblapply(1:length(ages), function(i) {
   colnames(coords) <- c("palaeolng", "palaeolat")
   coords <- data.frame(coords)
   coords$rounded_age <- rot_age
+  coords <- cbind.data.frame(rot_coords, coords)
   coords
   
 })
 
 rotations <- dplyr::bind_rows(rotations)
-
-rotations <- cbind.data.frame(uniq, rotations)
-
-rotations <- rotations[,-6]
 
 data <- plyr::join(x = data, y = rotations, type = "full", by = c("lon" = "lon", "lat" = "lat", "rounded_age" = "rounded_age"), match = "all")
 

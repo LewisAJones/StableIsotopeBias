@@ -21,7 +21,7 @@ r <- stack(r)
 
 crs(r) <- CRS('+proj=longlat')
 
-r <- resample(x = r, y = raster(res = 0.05))
+r <- disaggregate(r, 10, method='bilinear')
 r[r >= 0 & r < 1500] <- 2
 r[r >= 1500] <- 1
 r[r >= -300 & r <= 0] <- 3
@@ -32,7 +32,7 @@ xy <- unique(cbind(idb$palaeolng, idb$palaeolat))
 colnames(xy) <- c("x", "y")
 xy <- project(xy = xy, proj = "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84")
 
-png("./figures/Aptian.png", width = 300, height = 200, res = 600, units = "mm")
+jpeg("./figures/Aptian.jpg", width = 300, height = 200, res = 600, units = "mm")
 par(mar=c(1,4,1,1), oma=c(1,1,1,1))
 plot(rasMoll, col = c(rgb(0.825,0.725,0.625,1), rgb(0.9,0.8,0.7,1), rgb(0.85,0.99,0.99,1), rgb(0.6,0.85,0.9,1)), legend = F, add = F, 
      box = F, axes = F, bg = "white", ylim = c(-9000000,9000000),

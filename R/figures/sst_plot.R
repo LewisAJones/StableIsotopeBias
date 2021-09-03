@@ -18,7 +18,7 @@ col <- c("black")
 #---------------------------------
 #read data
 data <- read.csv("./results/SST/extracted_temp.csv")
-stage_vals <- read.csv("./results/SST/binned_vals.csv")
+stage_vals <- read.csv("./results/SST/stage_binned_vals.csv")
 stage_vals$mid_ma <- (stage_vals$max_ma + stage_vals$min_ma)/2
 
 p1 <- ggplot() +
@@ -146,4 +146,4 @@ p4 <- ggplot() +
 
 plots <- ggarrange(p1, p2, p3, p4, ncol=2, nrow=2, labels = "AUTO", align = "h", font.label = list(size = 20))
 
-ggsave(file = "./figures/extracted_temperature.png", plot = plots, width = 200, height = 95, units = "mm", dpi = 300, scale = 1.75)
+ggsave(file = "./figures/extracted_temperature.jpg", plot = plots, width = 200, height = 95, units = "mm", dpi = 300, scale = 1.75)

@@ -13,6 +13,10 @@ source("./R/functions/get_centroid.R")
 data <- read.csv("./data/rotated_Veizer_data.csv")
 data <- subset(data, !is.na(palaeolng) | !is.na(palaeolat))
 
+if(exclude_centroids == TRUE){
+  data <- subset(data, comments != "Random assignment")
+}
+
 #get unique stages
 stages <- unique(data$interval_name)
 
@@ -29,7 +33,7 @@ for(s in stages){
   out <- cbind.data.frame(interval_name, MST, occupancy, terrestrial, ODP, centroid) #bind data
   master <- rbind.data.frame(master, out) #bind to master dataframe
 }
-#download stages
+#load stages
 stages <- read.csv("./data/stage_bins.csv")#get stage mid age for plotting later
 #join to data
 master <- plyr::join(x = stages, y = master, by = "interval_name", type = "left", match = "all")
@@ -38,3 +42,22 @@ master <- plyr::join(x = stages, y = master, by = "interval_name", type = "left"
 #master[vec, c("upper", "mean", "lower")] <- NA
 #write data
 write.csv(master, "./results/spatial_stats/stage_level_spatial_stats.csv", row.names = FALSE)
+
+#get unique bins
+bins <- unique(data$mid_ma_10myr)
+
+#run for loop for each stage
+master <- data.frame()
+for(s in bins){
+  age <- s #save bin name for later
+  out <- subset(data, mid_ma_10myr == age) #subset by bin
+  MST <- get_MST(xy = out[,c("palaeolng", "palaeolat")]) #get MST
+  occupancy <- get_occupancy(xy = out[,c("palaeolng", "palaeolat")], spacing = spacing) #get grid cell occupancy
+  terrestrial <- get_occupancy(xy = subset(out, ODP == 0)[,c("palaeolng", "palaeolat")], spacing = spacing) #get grid cell occupancy
+  ODP <- get_occupancy(xy = subset(out, ODP == 1)[,c("palaeolng", "palaeolat")], spacing = spacing) #get grid cell occupancy
+  centroid <- get_lat_centroid(lat = out[,c("palaeolat")])
+  out <- cbind.data.frame(age, MST, occupancy, terrestrial, ODP, centroid) #bind data
+  master <- rbind.data.frame(master, out) #bind to master dataframe
+}
+#write data
+write.csv(master, "./results/spatial_stats/myr10_spatial_stats.csv", row.names = FALSE)

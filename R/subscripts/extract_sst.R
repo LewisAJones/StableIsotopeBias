@@ -6,7 +6,12 @@
 library(raster)
 source("./R/options.R")
 #---------------------------------
-data <- read.csv("./data/cleaned_StabIsoDB.csv")
+data <- read.csv("./data/Cleaned_Veizer_Centroid.csv")
+
+if(exclude_centroids == TRUE){
+  data <- subset(data, comments != "Random assignment")
+}
+
 sst_artificial <- raster("./layers/Pre_industrial.nc")
 data$modern_temp_mean <- cellStats(sst_artificial, mean)
 data$modern_temp_ext <- raster::extract(x = sst_artificial, y = data[,c("palaeolng", "palaeolat")])

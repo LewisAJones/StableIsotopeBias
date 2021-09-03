@@ -1,6 +1,6 @@
 # Get sea surface temperature data
 # Lewis A. Jones
-# March 2020
+# March 2021
 #---------------------------------
 # Load package
 library(sdmpredictors)
@@ -112,6 +112,10 @@ write.csv(eocene, "./results/SST/eocene_temp_grad.csv", row.names = FALSE)
 
 data <- read.csv("./data/rotated_Veizer_data.csv")
 
+if(exclude_centroids == TRUE){
+  data <- subset(data, comments != "Random assignment")
+}
+
 data$modern_ext_t <- NA
 
 for(i in 1:nrow(modern)){
@@ -140,3 +144,7 @@ global_modern <- weighted.mean(x = global_modern, w = weights[1:91], na.rm = TRU
 
 global_eocene <- rev(eocene$y)
 global_eocene <- weighted.mean(x = global_eocene, w = weights[1:91], na.rm = TRUE)
+
+fileConn<-file("./results/SST/global_sst.txt")
+writeLines(paste("Global Modern SST =", global_modern, ", Global Eocene SST =", global_eocene), fileConn)
+close(fileConn)

@@ -42,7 +42,7 @@ names(stk) <- c("Quaternary", "Neogene", "Paleogene", "Cretaceous", "Jurassic", 
 
 crs(stk) <- CRS('+proj=longlat')
 
-stk <- resample(x = stk, y = raster(res = 0.1))
+stk <- disaggregate(stk, 5, method='bilinear')
 stk[stk >= 0 & stk < 1500] <- 2
 stk[stk >= 1500] <- 1
 stk[stk >= -300 & stk <= 0] <- 3
@@ -71,7 +71,7 @@ period_plot <- function(x, xy){
   }
 
 }
-png("./figures/maps.png", width = 200, height = 150, res = 300, units = "mm")
+jpeg("./figures/maps.jpg", width = 200, height = 150, res = 300, units = "mm")
 period_plot(x = stk, xy = idb)
 dev.off()
 

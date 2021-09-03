@@ -19,17 +19,17 @@ col <- c("black")
 #read data
 spat <- read.csv("./results/spatial_stats/stage_level_spatial_stats.csv")
 # temperature stage-level
-temp <- read.csv("./results/SST/binned_vals.csv")
+temp <- read.csv("./results/SST/stage_binned_vals.csv")
 
 spat$temp <- temp$temperature_stage
 spat <- subset(spat, !is.na(temp))
 
-x <- diff(rev(spat$mean))
+x <- diff(rev(spat$Median))
 y <- diff(rev(spat$temp))
 names <- rev(spat$interval_name[1:87])
 stagecol <- rev(spat$color[1:87])
 
-png("./figures/linear_models.png", width = 230, height = 110, res = 300, units = "mm")
+jpeg("./figures/linear_models.jpg", width = 230, height = 110, res = 300, units = "mm")
 par(mfrow = c(1,2), mar = c(4.5,4.5,1,1), mgp = c(2.25,0.75,0), las = 1)
 
 
@@ -50,7 +50,7 @@ newx = seq(min(df$x),max(df$x),by = 0.05)
 conf_interval <- predict(olm, newdata=data.frame(x=newx), interval="confidence",
                          level = 0.95)
 
-plot(df$x,df$y, xlab = expression(Delta~"Absolute palaeolatitudinal centroid ("*degree*")"), 
+plot(df$x,df$y, xlab = expression(Delta~"Absolute palaeolatitudinal median ("*degree*")"), 
      ylab = expression(Delta~"Global mean temperature ( "*degree~"C) "), main = "", pch = 21, bg = df$stagecol, cex = 1.5, 
      type = "n", cex.lab = 1.2, cex.axis = 0.85) #xlim = c(min(x)-1,max(x)+1))
 
@@ -62,12 +62,12 @@ lines(newx, conf_interval[,2], col="red", lty=2, lwd = 2)
 lines(newx, conf_interval[,3], col="red", lty=2, lwd = 2)
 #
 # Add text with R2 and p
-text(-13,14, substitute(~~italic(R)^2~"="~r2~","~~italic(P)~"="~pval, lm_coef), cex = 1)
+text(-30,14, substitute(~~italic(R)^2~"="~r2~","~~italic(P)~"="~pval, lm_coef), cex = 1)
 #
 # add line segments
 # 
 # Add "A"
-text(-55,16,expression(bold("A")),xpd = T, cex = 1.5)
+text(-90,16,expression(bold("A")),xpd = T, cex = 1.5)
 
 df1 <- subset(df, names != "Olenekian")
 df1 <- subset(df1, names != "Anisian")
@@ -87,7 +87,7 @@ newx = seq(min(df1$x),max(df1$x),by = 0.05)
 conf_interval <- predict(olm, newdata=data.frame(x=newx), interval="confidence",
                          level = 0.95)
 
-plot(df$x,df$y, xlab = expression(Delta~"Absolute palaeolatitudinal centroid ("*degree*")"), 
+plot(df$x,df$y, xlab = expression(Delta~"Absolute palaeolatitudinal median ("*degree*")"), 
      ylab = expression(Delta~"Global mean temperature ( "*degree~"C) "), main = "", pch = 21, bg = df$stagecol, cex = 1.5, 
      type = "n", cex.lab = 1.2, cex.axis = 0.85) #xlim = c(min(x)-1,max(x)+1))
 
@@ -101,11 +101,11 @@ lines(newx, conf_interval[,2], col="red", lty=2, lwd = 2)
 lines(newx, conf_interval[,3], col="red", lty=2, lwd = 2)
 #
 # Add text with R2 and p
-text(-11,14, substitute(~~italic(R)^2~"="~r2~","~~italic(P)~"="~pval, lm_coef), cex = 1)
+text(-27,14, substitute(~~italic(R)^2~"="~r2~","~~italic(P)~"="~pval, lm_coef), cex = 1)
 #
 # add line segments
 # 
 # Add "A"
-text(-55,16,expression(bold("B")),xpd = T, cex = 1.5)
+text(-90,16,expression(bold("B")),xpd = T, cex = 1.5)
 
 dev.off()
